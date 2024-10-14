@@ -4,10 +4,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#0d3b66",
-        secondary: "#faf0ca",
+        primary: "#1E3A8A",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        ".no-scrollbar": {
+          /* Hide scrollbar for Chrome, Safari, and Opera */
+          "-webkit-overflow-scrolling": "touch",
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          /* Hide scrollbar for IE, Edge, and Firefox */
+          "-ms-overflow-style": "none", // IE and Edge
+          "scrollbar-width": "none", // Firefox
+        },
+      });
+    },
+  ],
 };
