@@ -93,7 +93,7 @@ const InfoCards = () => {
 
       {showLeftArrow && (
         <button
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-primary text-white rounded-full p-2 shadow-lg"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-200 text-primary rounded-full p-2 shadow-2xl"
           onClick={() => scrollCards("left")}
         >
           <FaArrowLeft />
@@ -101,7 +101,7 @@ const InfoCards = () => {
       )}
       {showRightArrow && (
         <button
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-primary text-white rounded-full p-2 shadow-lg"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-200 text-primary rounded-full p-2 shadow-2xl"
           onClick={() => scrollCards("right")}
         >
           <FaArrowRight />
