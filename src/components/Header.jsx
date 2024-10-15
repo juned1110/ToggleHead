@@ -1,8 +1,9 @@
-import React from "react";
-import { FaSearch } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaSearch, FaAngleDown, FaBars, FaTimes } from "react-icons/fa";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   const navItems = [
     { name: "Qualifications", hasDropdown: true },
     { name: "Organizations", hasDropdown: true },
@@ -11,10 +12,32 @@ const Header = () => {
     { name: "Lorem Ipsum", hasDropdown: true },
   ];
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <header className="bg-primary text-white p-4 flex flex-col md:flex-row justify-between items-center">
-      <div className="text-xl font-bold mb-4 md:mb-0 md:ml-10">LOGO</div>
-      <nav className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 items-center">
+    <header className="bg-primary text-white p-4 flex justify-between items-center">
+      <div className="text-xl font-bold md:ml-10">LOGO</div>
+
+      {/* Hamburger Menu */}
+      <div className="md:hidden text-2xl cursor-pointer" onClick={toggleMenu}>
+        {!menuOpen && <FaBars />}
+      </div>
+
+      {/* Navigation Menu - Sliding from the right on mobile */}
+      <nav
+        className={`fixed top-0 right-0 h-full w-64 bg-primary text-white flex flex-col items-start p-6 space-y-4 z-50 transform ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 md:static md:transform-none md:flex-row md:space-x-6 md:p-0 md:w-auto md:h-auto md:bg-transparent md:flex`}
+      >
+        {/* Close Button */}
+        <div className="w-full flex justify-start mb-6 md:hidden">
+          <button className="text-2xl text-white" onClick={toggleMenu}>
+            <FaTimes />
+          </button>
+        </div>
+
         {navItems.map((item, index) => (
           <div key={index} className="relative group">
             <a
@@ -43,11 +66,10 @@ const Header = () => {
             )}
           </div>
         ))}
-        <FaSearch className="hover:text-gray-300 cursor-pointer" />
-        <a
-          href="#"
-          className="bg-white text-primary py-2 px-4 font-medium rounded-2xl ml-4 hover:bg-gray-100"
-        >
+
+        <FaSearch className="hover:text-gray-300 cursor-pointer h-8" />
+
+        <a className="bg-white text-primary py-1 px-5 font-medium rounded-2xl hover:bg-gray-100 cursor-pointer ">
           Enrolment
         </a>
       </nav>
