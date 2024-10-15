@@ -42,45 +42,32 @@ const InfoCards = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
 
-  const checkScrollPosition = () => {
-    if (cardContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = cardContainerRef.current;
-      setShowLeftArrow(scrollLeft > 0);
-      setShowRightArrow(scrollLeft < scrollWidth - clientWidth);
-    }
-  };
-
-  const scrollRight = () => {
-    if (cardContainerRef.current) {
-      cardContainerRef.current.scrollBy({
-        left: 200,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollLeft = () => {
-    if (cardContainerRef.current) {
-      cardContainerRef.current.scrollBy({
-        left: -200,
-        behavior: "smooth",
-      });
-    }
-  };
-
   useEffect(() => {
-    checkScrollPosition();
-    const cardContainer = cardContainerRef.current;
+    const handleScroll = () => {
+      const container = cardContainerRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } = container;
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
+    };
 
-    if (cardContainer) {
-      cardContainer.addEventListener("scroll", checkScrollPosition);
-      return () =>
-        cardContainer.removeEventListener("scroll", checkScrollPosition);
-    }
+    cardContainerRef.current.addEventListener("scroll", handleScroll);
+
+    return () => {
+      cardContainerRef.current.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
+  const scrollCards = (direction) => {
+    const container = cardContainerRef.current;
+    const scrollAmount = direction === "left" ? -300 : 300;
+    container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
   return (
-    <section className="relative p-10">
+    <section className="relative p-4 md:p-10">
+      <h2 className="text-2xl font-bold text-center text-primary">
+        Info Cards
+      </h2>
       <div
         ref={cardContainerRef}
         className="flex space-x-4 overflow-x-auto p-4 no-scrollbar"
@@ -89,34 +76,33 @@ const InfoCards = () => {
         {cards.map((card) => (
           <div
             key={card.id}
-            className="flex-shrink-0 bg-primary text-white p-6 rounded-2xl shadow-md w-[25vw]"
+            className="flex-shrink-0 bg-primary text-white p-6 rounded-2xl shadow-md w-[80vw] md:w-[25vw]"
             style={{ scrollSnapAlign: "center" }}
           >
             <h2 className="text-xl font-bold">{card.title}</h2>
             <p className="mt-2">{card.description}</p>
-            <div className="mt-4 w-48 -ml-4 text-white py-2 px-4 rounded flex">
+            <div className="mt-4 text-white py-2 px-4 rounded flex">
               Know More
-              <span className=" w-10 ml-2 mt-1 text-xl hover:cursor-pointer">
+              <span className="ml-2 mt-1 text-xl">
                 <FaCircleArrowRight />
               </span>
             </div>
           </div>
         ))}
       </div>
+
       {showLeftArrow && (
         <button
-          onClick={scrollLeft}
-          className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-primary text-white p-3 rounded-full shadow-md hover:bg-blue-800 transition duration-300"
-          aria-label="Scroll Left"
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-primary text-white rounded-full p-2 shadow-lg"
+          onClick={() => scrollCards("left")}
         >
           <FaArrowLeft />
         </button>
       )}
       {showRightArrow && (
         <button
-          onClick={scrollRight}
-          className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-primary text-white p-3 rounded-full shadow-md hover:bg-blue-800 transition duration-300"
-          aria-label="Scroll Right"
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-primary text-white rounded-full p-2 shadow-lg"
+          onClick={() => scrollCards("right")}
         >
           <FaArrowRight />
         </button>
