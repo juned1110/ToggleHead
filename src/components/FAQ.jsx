@@ -16,8 +16,10 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="p-10">
-      <h2 className="text-2xl font-bold text-center mb-8 text-primary">FAQ</h2>
+    <section className="p-4 md:p-10">
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-primary">
+        FAQ
+      </h2>
       {questions.map((question, index) => (
         <div key={index} className="mb-4">
           <button
@@ -34,7 +36,7 @@ const FAQ = () => {
               open === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            <p className="p-4 text-gray-700">
+            <p className="p-4 text-sm md:text-base text-gray-700">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
