@@ -39,7 +39,7 @@ const Header = () => {
         </div>
 
         {navItems.map((item, index) => (
-          <div key={index} className="relative group">
+          <div key={index} className="relative group h-10 top-1">
             <a
               href="#"
               className="hover:text-gray-300 flex items-center space-x-1"
@@ -66,10 +66,11 @@ const Header = () => {
             )}
           </div>
         ))}
+        <div className="h-14">
+          <FaSearch className="hover:text-gray-300 cursor-pointer h-8" />
+        </div>
 
-        <FaSearch className="hover:text-gray-300 cursor-pointer h-8" />
-
-        <a className="bg-white text-primary py-1 px-5 font-medium rounded-2xl hover:bg-gray-100 cursor-pointer ">
+        <a className="bg-white text-primary py-2 px-5 font-medium rounded-2xl hover:bg-gray-100 cursor-pointer ">
           Enrolment
         </a>
       </nav>
