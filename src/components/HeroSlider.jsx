@@ -50,9 +50,9 @@ const HeroSlider = () => {
         <p className="mt-2 md:mt-4 text-sm md:text-base text-gray-600">
           {slides[currentSlide].description}
         </p>
-        <button className="mt-4 md:mt-6 px-6 md:px-8 py-2 md:py-3 bg-primary text-white rounded-lg relative">
+        <button className="mt-4 md:mt-6 px-6 md:px-11 py-2 md:py-3 bg-primary text-white rounded-lg relative">
           {slides[currentSlide].buttonText}
-          <span className="ml-2 inline-block text-xl md:text-2xl">
+          <span className="ml-2 inline-block text-xl md:text-2xl absolute">
             <FaCaretRight />
           </span>
         </button>
