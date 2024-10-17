@@ -65,9 +65,6 @@ const InfoCards = () => {
 
   return (
     <section className="relative p-4 md:p-10">
-      <h2 className="text-2xl font-bold text-center text-primary">
-        Info Cards
-      </h2>
       <div
         ref={cardContainerRef}
         className="flex space-x-4 overflow-x-auto p-4 no-scrollbar"
